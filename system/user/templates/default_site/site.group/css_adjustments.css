@@ -1,0 +1,11 @@
+.blueimp-gallery > .slides > .slide > .text-content {
+    overflow: auto;
+    margin: 60px auto;
+    padding: 0 60px;
+    max-width: 920px;
+    text-align: left;
+}
+
+.icon-image { padding: 19.4px; }
+
+.thumbnail img { max-height: 188px; }

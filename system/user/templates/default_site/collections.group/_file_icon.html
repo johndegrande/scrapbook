@@ -1,0 +1,110 @@
+<?php
+$mime = "{embed:mime}";
+$extension = "{embed:extension}";
+
+if ($extension == "docx" or $extension == "docm" or $extension == "dotx" or $extension == "dotm") {
+	$mime = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+} else if ($extension == "xlsx" or $extension == "xlsm" or $extension == "xltx" or $extension == "xltm" or $extension == "xlsb" or $extension == "xlam") {
+	$mime = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+} else if ($extension == "pptx" or $extension == "pptm" or $extension == "ppsx" or $extension == "ppsm" or $extension == "potx" or $extension == "potm" or $extension == "ppam" or $extension == "sldx" or $extension == "sldm") {
+    $mime = 'application/vnd.openxmlformats-officedocument.presentationml.presentation';
+}
+
+$mime = explode('/', $mime);
+$mime_type = $mime[0];
+$mime_detail = $mime[1];
+
+if ($mime_type == "application") {
+	switch($mime_detail) {
+		case "csv":
+		case "vnd.ms-excel":
+		case "vnd.ms-excel.addin.macroEnabled.12":
+		case "vnd.ms-excel.sheet.binary.macroEnabled.12":
+		case "vnd.ms-excel.sheet.macroEnabled.12":
+		case "vnd.ms-excel.template.macroEnabled.12":
+		case "vnd.msexcel":
+		case "vnd.openxmlformats-officedocument.spreadsheetml":
+		case "vnd.openxmlformats-officedocument.spreadsheetml.sheet":
+		case "vnd.openxmlformats-officedocument.spreadsheetml.template":
+		case "excel":
+			$output = 'fa-file-excel-o';
+			break;
+		case "msword":
+		case "vnd.ms-word.document.macroEnabled.12":
+		case "ms-word.template.macroEnabled.12":
+		case "vnd.openxmlformats-officedocument.wordprocessingml":
+		case "vnd.openxmlformats-officedocument.wordprocessingml.document":
+		case "vnd.openxmlformats-officedocument.wordprocessingml.template":
+		case "vnd.ms-word.template.macroEnabled.12":
+			$output = 'fa-file-word-o';
+			break;
+		case "pdf":
+		case "x-download":
+			$output = 'fa-file-pdf-o';
+			break;
+		case "postscript":
+		case "x-photoshop":
+			$output = 'fa-file-image-o';
+			break;
+		case "epub+zip":
+		case "x-gtar":
+		case "x-gzip":
+		case "x-rar-compressed":
+		case "x-stuffit":
+		case "x-tar":
+		case "x-zip":
+		case "x-zip-compressed":
+		case "zip":
+			$output = 'fa-file-archive-o';
+			break;
+		case "powerpoint":
+		case "vnd.ms-powerpoint":
+		case "vnd.ms-powerpoint.addin.macroEnabled.12":
+		case "vnd.ms-powerpoint.presentation.macroEnabled.12":
+		case "vnd.ms-powerpoint.slideshow.macroEnabled.12":
+		case "vnd.ms-powerpoint.template.macroEnabled.12":
+		case "vnd.openxmlformats-officedocument.presentationml.presentation":
+		case "vnd.openxmlformats-officedocument.presentationml.slideshow":
+		case "vnd.openxmlformats-officedocument.presentationml.template":
+		case "vnd.ms-powerpoint.slide.macroEnabled.12":
+			$output = 'fa-file-powerpoint-o';
+			break;
+		case "vnd.oasis.opendocument.text":
+		case "vnd.oasis.opendocument.text-master":
+		case "vnd.oasis.opendocument.text-template":
+		case "vnd.oasis.opendocument.text-web":
+			$output = 'fa-file-text-o';
+			break;
+		case "xhtml+xml":
+			$output = 'fa-file-code-o';
+			break;
+		default:
+			$output = 'fa-file-o';
+			break;
+	}
+} else if ($mime_type == "audio") {
+	$output = 'fa-file-audio-o';	
+} else if ($mime_type == "image") {
+	$output = 'fa-file-image-o';
+} else if ($mime_type == "text") {
+	switch($mime_detail) {
+		case "comma-separated-values":
+		case "css":
+		case "csv":
+		case "html":
+		case "x-comma-separated-values":
+		case "xml":
+			$output = 'fa-file-code-o';
+			break;
+		default:
+			$output = 'fa-file-text-o';
+			break;
+	}
+} else if ($mime_type == "video") {
+	$output = 'fa-file-video-o';
+} else {
+	$output = 'fa-file-o';	
+}
+
+echo $output;
+?>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {embed="_layouts/_meta"}
+    {layout:extra_css}
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        {embed="_layouts/_header"}
+
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+            
+            	{if layout:breadcrumbs}
+                <br />
+                <div class="row">
+                  <div class="col-md-12">
+                    <ol class="breadcrumb" itemprop="breadcrumb">
+                      <li><a href="/">Home</a></li>
+                      {layout:breadcrumbs}
+                    </ol>
+                  </div>
+                </div>
+                {/if}
+                
+                <div class="row">
+                    <div class="col-lg-12">
+                        {if layout:header}<h1 class="page-header">{layout:header}</h1>{/if}
+                        
+                        {layout:contents}
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    {embed="_layouts/_footer"}
+    {layout:extra_js}
+
+</body>
+</html>

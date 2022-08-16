@@ -1,0 +1,13 @@
+{layout="_layouts/_layout_main"}
+{layout:set name="header"}Choose a Collection{/layout:set}
+<div class="row">
+  {exp:gwcode_categories group_id="1" custom_fields="yes" style="linear" dynamic="no"}
+  {if admin_only != 1 || logged_in}
+  <div class="col-md-3" style="margin-bottom: 15px;" data-toggle="tooltip" title="{cat_name}">
+	<a href="/collections/{cat_url_title}">
+	  <img src="<?php $img = "{cat_image}"; ?><?=str_replace('/covers/', '/covers/_small/', $img)?>" class="img-responsive img-thumbnail" alt="{cat_name}" />
+	</a>
+  </div>
+  {/if}
+  {/exp:gwcode_categories}
+</div>

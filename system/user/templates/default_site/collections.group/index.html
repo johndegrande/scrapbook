@@ -1,0 +1,117 @@
+{layout="_layouts/_layout_main"}
+{if segment_3 == "album"}
+{exp:channel:entries channel="albums" url_title="{segment_4}" limit="1" dynamic="no" disable="categories|category_fields|member_data|pagination"}
+{layout:set name="header"}{title} <small>{segment_2_category_name}{/layout:set}
+{layout:set name="breadcrumbs"}
+	<li><a href="/{segment_1}/{segment_2}">{segment_2_category_name}</a></li>
+	<li class="active">{title}</li>
+{/layout:set}
+
+{if description}
+<div class="row">
+	<div class="col-md-12">
+		{description}
+		
+		<hr />
+	</div>
+</div>
+{/if}
+		
+{images limit="1000"}
+{if image:count == 1}
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <div class="row">
+			  <div class="col-md-6">
+				<h3 class="panel-title"><i class="fa fa-w fa-picture-o"></i> <b>Images</b></h3>
+			  </div>
+			  <div class="col-md-6 text-right">
+			    <a href="/collections/zip/{url_title}" class="btn btn-primary btn-sm" target="_blank"><i class="fa fa-download"></i> Download ZIP of Images</a>
+			  </div>
+			</div>
+		  </div>
+		  <div class="panel-body">
+{/if}
+			<div class="col-md-2 col-sm-4 col-xs-6 portfolio-item">
+                <a href="{image:url}" data-caption="<b>{image:title}</b>{if image:description}<br>{image:description}{/if}" class="thumbnail" data-fancybox="gallery">
+                    <img class="img-responsive" src="{image:url:small}" style="width: 154px; height: 116px;" alt="{image:title}" title="{image:title}" data-toggle="tooltip">
+                </a>
+            </div>
+{if image:count == image:total}
+		  </div>
+	  </div>
+	</div>
+</div>
+{/if}
+{/images}
+
+{exp:channel_videos:videos entry_id="{entry_id}" limit="1000"}
+{if video:count == 1}
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+			<h3 class="panel-title"><i class="fa fa-w fa-file-video-o"></i> <b>Videos</b></h3>
+		  </div>
+		  <div class="panel-body">
+{/if}
+			<div class="col-md-2 col-sm-4 col-xs-6 portfolio-item">
+                <a href="{video:url}" class="thumbnail" data-fancybox="group">
+                    <img class="img-responsive" src="{video:img_url}" alt="{video:title}" title="{video:title}" data-toggle="tooltip">
+                </a>
+            </div>
+{if video:count == video:total}
+		  </div>
+	  </div>
+	</div>
+</div>
+{/if}
+{/exp:channel_videos:videos}
+
+{files}
+{if files:count == 1}
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+			<h3 class="panel-title"><i class="fa fa-w fa-folder"></i> <b>Files</b></h3>
+		  </div>
+		  <div class="panel-body">
+{/if}
+			<div class="col-md-2 col-sm-4 col-xs-6 portfolio-item">
+                <a href="javascript:;" data-caption="<b>{files:title}</b>{if files:caption}<br><small>{files:caption:attr_safe}</small>{/if}" class="thumbnail text-center" data-fancybox="iframe" data-src="{if files:url}{files:url}{if:else}{files:file}{/if}" data-type="iframe">
+					{if files:url}
+					<?php $mime = "{files:mime_type}"; ?>
+					{if:else}
+					{files:file}<?php $mime = "{mime_type}"; ?>{/files:file}
+					{/if}
+					<i class="fa fa-fw fa-5x {embed="collections/_file_icon" mime="<?=$mime?>"}" title="{files:title}" data-toggle="tooltip"></i>	
+                </a>
+            </div>
+{if files:count == files:total_rows}
+		  </div>
+	  </div>
+	</div>
+</div>
+{/if}
+{/files}
+{/exp:channel:entries}
+{if:else}
+{layout:set name="header"}{segment_2_category_name}{/layout:set}
+{layout:set name="breadcrumbs"}
+	<li class="active">{segment_2_category_name}</li>
+{/layout:set}
+
+<div class="row">
+	{exp:channel:entries channel="albums" category="{segment_2_category_id}" dynamic="no" orderby="title" sort="asc" disable="categories|category_fields|member_data|pagination"}
+	{if total_results == 1}{redirect="{segment_1}/{segment_2}/album/{url_title}"}{/if}
+	<div class="col-md-3">
+		<a href="/{segment_1}/{segment_2}/album/{url_title}" class="thumbnail" title="{title}" data-toggle="tooltip">
+			<img src="{cover:small}" alt="{title}" class="img-responsive" />
+		</a>
+	</div>
+	{/exp:channel:entries}
+<div>
+{/if}

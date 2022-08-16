@@ -1,0 +1,9 @@
+{exp:channel:entries channel="albums" url_title="{segment_3}" limit="1" dynamic="no" disable="categories|category_fields|member_data|pagination"}
+{exp:zip direct_output="yes" folder="images/zips" filename="{url_title}.zip" comment="Made in ExpressionEngine"}
+    {zip:files}
+		{images limit="10000"}
+        [images/uploads/{entry_id}/{image:filename}]
+		{/images}
+    {/zip:files}
+{/exp:zip}
+{/exp:channel:entries}
